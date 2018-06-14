@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.padaria.domain.Funcionario;
-import br.com.padaria.services.FuncionarioService;
+import br.com.padaria.domain.Mesa;
+import br.com.padaria.services.MesaService;
 
 @RestController
-@RequestMapping(value="/funcionarios")
-public class FuncionarioResource {
+@RequestMapping(value="/mesas")
+public class MesaResource {
 
 	@Autowired
-	FuncionarioService service;
+	MesaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Funcionario obj = service.buscar(id);
+		Mesa obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> inserir (@RequestBody Funcionario obj){
+	public ResponseEntity<Void> inserir (@RequestBody Mesa obj){
 		
 		service.inserir(obj);
 		

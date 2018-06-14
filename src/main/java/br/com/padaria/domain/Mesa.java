@@ -1,13 +1,15 @@
 package br.com.padaria.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Mesa implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -16,14 +18,14 @@ public class Mesa implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Produto produtos[];
+	private List<Produto> produtos = new ArrayList<>();
 	
 	private Boolean fechada;
 
 	public Mesa() {
 	}
 
-	public Mesa(Integer id, Produto[] produtos, Boolean fechada) {
+	public Mesa(Integer id, List<Produto> produtos, Boolean fechada) {
 		super();
 		this.id = id;
 		this.produtos = produtos;
@@ -63,11 +65,11 @@ public class Mesa implements Serializable{
 		this.id = id;
 	}
 
-	public Produto[] getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(Produto[] produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
