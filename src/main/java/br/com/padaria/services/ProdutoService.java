@@ -1,5 +1,6 @@
 package br.com.padaria.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public class ProdutoService {
 	 	Produto produto = find(id);
 	 	produto.setAtivo(false);
 		update(produto);
+	}
+	public List<Produto> findAll(){
+		return repo.findAll();
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.padaria.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,8 @@ public class MesaService {
 		find(obj.getId());
 
 		return repo.save(obj);
+	}
+	public List<Mesa> findAll(){
+		return repo.findAll();
 	}
 }

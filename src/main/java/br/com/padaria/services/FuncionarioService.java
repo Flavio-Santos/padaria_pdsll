@@ -1,5 +1,6 @@
 package br.com.padaria.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,8 @@ public class FuncionarioService {
 	 	Funcionario funcionario = find(id);
 	 	funcionario.setAtivo(false);
 		update(funcionario);
+	}
+	public List<Funcionario> findAll(){
+		return repo.findAll();
 	}
 }

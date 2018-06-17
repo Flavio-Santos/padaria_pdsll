@@ -1,6 +1,7 @@
 package br.com.padaria.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,12 @@ public class ProdutoResource {
 		Produto obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Produto>> findAll() {
+		List<Produto> listProductcs = service.findAll();
+		return ResponseEntity.ok().body(listProductcs);
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Produto obj) {
@@ -48,4 +55,5 @@ public class ProdutoResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
 }
