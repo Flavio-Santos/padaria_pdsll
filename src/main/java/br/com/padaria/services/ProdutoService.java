@@ -31,4 +31,9 @@ public class ProdutoService {
 
 		return repo.save(obj);
 	}
+	public void delete(Integer id){
+	 	Produto produto = find(id);
+	 	produto.setAtivo(false);
+		update(produto);
+	}
 }

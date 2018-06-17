@@ -22,16 +22,18 @@ public class Produto implements Serializable{
 	
 	private String descricao;
 	
+	private Boolean ativo;
 	
 	public Produto() {
 	}
 
-	public Produto(Integer id, String nome, Double preco, String descricao) {
+	public Produto(Integer id, String nome, Double preco, String descricao, Boolean ativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.descricao = descricao;
+		this.ativo = ativo;
 	}
 
 	public Integer getId() {
@@ -96,5 +98,13 @@ public class Produto implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }

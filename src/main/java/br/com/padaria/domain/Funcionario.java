@@ -19,15 +19,18 @@ public class Funcionario implements Serializable{
 	private String nome;
 	
 	private Boolean gerente;
+	
+	private Boolean ativo;
 
 	public Funcionario() {
 	}
 
-	public Funcionario(Integer id, String nome, Boolean gerente) {
+	public Funcionario(Integer id, String nome, Boolean gerente, Boolean ativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.gerente = gerente;
+		this.ativo = ativo;
 	}
 
 	@Override
@@ -66,11 +69,19 @@ public class Funcionario implements Serializable{
 	public String getNome() {
 		return nome;
 	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	
 	public Boolean getGerente() {
 		return gerente;
 	}

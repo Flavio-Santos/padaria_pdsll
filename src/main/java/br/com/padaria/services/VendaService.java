@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.padaria.domain.Funcionario;
+import br.com.padaria.domain.Produto;
 import br.com.padaria.domain.Venda;
 import br.com.padaria.repositories.VendaRepository;
 import br.com.padaria.services.exceptions.ObjectNotFoundException;

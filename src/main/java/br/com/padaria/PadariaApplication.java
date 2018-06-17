@@ -39,10 +39,10 @@ public class PadariaApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Produto prod1 = new Produto(null, "coxinha", 2.5, "coxina de frango");
-		Produto prod2 = new Produto(null, "kibe", 1.5, "com recheio de queijo");
-		Produto prod3 = new Produto(null, "torta", 5.0, "torta de frango com catupiry");
-		Produto prod4 = new Produto(null, "pastel", 4.0, "pastel de calabresa com orégano");
+		Produto prod1 = new Produto(null, "coxinha", 2.5, "coxina de frango",true);
+		Produto prod2 = new Produto(null, "kibe", 1.5, "com recheio de queijo",true);
+		Produto prod3 = new Produto(null, "torta", 5.0, "torta de frango com catupiry",true);
+		Produto prod4 = new Produto(null, "pastel", 4.0, "pastel de calabresa com orégano",true);
 		
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		produtos.add(prod1);
@@ -67,9 +67,12 @@ public class PadariaApplication implements CommandLineRunner{
 		mesaRepository.save(mesa2);
 		mesaRepository.save(mesa3);
 		
-		Funcionario func1 = new Funcionario(null, "Flavio", true);
+		Funcionario func1 = new Funcionario(null, "Flavio", true,true);
+		
+		Funcionario func2 = new Funcionario(null, "Jordi", true,true);
 		
 		funcionarioRepository.save(func1);
+		funcionarioRepository.save(func2);
 		
 		
 		

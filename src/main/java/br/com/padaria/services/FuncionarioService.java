@@ -29,4 +29,9 @@ public class FuncionarioService {
 
 		return repo.save(obj);
 	}
+	public void delete(Integer id){
+	 	Funcionario funcionario = find(id);
+	 	funcionario.setAtivo(false);
+		update(funcionario);
+	}
 }
