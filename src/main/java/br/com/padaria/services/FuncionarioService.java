@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.padaria.domain.Funcionario;
 import br.com.padaria.repositories.FuncionarioRepository;
+import br.com.padaria.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class FuncionarioService {
@@ -14,12 +15,18 @@ public class FuncionarioService {
 	@Autowired
 	private FuncionarioRepository repo;
 	
-	public Funcionario buscar(Integer id) {
+	public Funcionario find(Integer id) {
 		Optional<Funcionario> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Funcionario.class.getName()));
 	}
 	public void inserir (Funcionario obj){
 		obj.setId(null);
 		repo.save(obj);
+	}
+	public Funcionario update(Funcionario obj) {
+		find(obj.getId());
+
+		return repo.save(obj);
 	}
 }

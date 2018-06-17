@@ -5,28 +5,28 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.padaria.domain.Mesa;
-import br.com.padaria.repositories.MesaRepository;
+import br.com.padaria.domain.Funcionario;
+import br.com.padaria.domain.Venda;
+import br.com.padaria.repositories.VendaRepository;
 import br.com.padaria.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class MesaService {
+public class VendaService {
 	
 	@Autowired
-	private MesaRepository repo;
+	private VendaRepository repo;
 	
-	public Mesa find(Integer id) {
-		Optional<Mesa> obj = repo.findById(id);
+	public Venda find(Integer id) {
+		Optional<Venda> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-		"Objeto não encontrado! Id: " + id + ", Tipo: " + Mesa.class.getName()));
+		"Objeto não encontrado! Id: " + id + ", Tipo: " + Funcionario.class.getName()));
 	}
-	public void inserir (Mesa obj){
+	public void inserir (Venda obj){
 		obj.setId(null);
 		repo.save(obj);
 	}
-	public Mesa update(Mesa obj) {
+	public Venda update(Venda obj) {
 		find(obj.getId());
-
 		return repo.save(obj);
 	}
 }

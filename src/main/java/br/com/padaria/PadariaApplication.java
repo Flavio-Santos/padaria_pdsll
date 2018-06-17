@@ -1,18 +1,19 @@
 package br.com.padaria;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.padaria.domain.Funcionario;
+import br.com.padaria.domain.Mesa;
 import br.com.padaria.domain.Produto;
 import br.com.padaria.repositories.FuncionarioRepository;
 import br.com.padaria.repositories.MesaRepository;
 import br.com.padaria.repositories.ProdutoRepository;
+import br.com.padaria.repositories.VendaRepository;
 
 @SpringBootApplication
 public class PadariaApplication implements CommandLineRunner{
@@ -25,6 +26,9 @@ public class PadariaApplication implements CommandLineRunner{
 	
 	@Autowired
 	MesaRepository mesaRepository;
+	
+	@Autowired
+	VendaRepository vendaRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PadariaApplication.class, args);
@@ -45,8 +49,29 @@ public class PadariaApplication implements CommandLineRunner{
 		produtos.add(prod2);
 		produtos.add(prod3);
 		produtos.add(prod4);
-
+		
+		ArrayList<Produto> produtos2 = new ArrayList<Produto>();
+		produtos2.add(prod1);
+		produtos2.add(prod2);
+		
 		produtoRepository.saveAll(produtos);
+		
+		Mesa mesa1 = new Mesa(null, false);
+		Mesa mesa2 = new Mesa(null, false);
+		Mesa mesa3 = new Mesa(null, false);
+		mesa1.setProdutos(produtos);
+		mesa2.setProdutos(produtos2);
+		
+		
+		mesaRepository.save(mesa1);
+		mesaRepository.save(mesa2);
+		mesaRepository.save(mesa3);
+		
+		Funcionario func1 = new Funcionario(null, "Flavio", true);
+		
+		funcionarioRepository.save(func1);
+		
+		
 		
 	}
 }

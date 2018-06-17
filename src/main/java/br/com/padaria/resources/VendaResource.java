@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.padaria.domain.Funcionario;
-import br.com.padaria.services.FuncionarioService;
+import br.com.padaria.domain.Venda;
+import br.com.padaria.services.VendaService;
 
 @RestController
-@RequestMapping(value="/funcionarios")
-public class FuncionarioResource {
+@RequestMapping(value="/vendas")
+public class VendaResource {
 
 	@Autowired
-	FuncionarioService service;
+	VendaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Funcionario> find(@PathVariable Integer id) {
-		Funcionario obj = service.find(id);
+	public ResponseEntity<Venda> find(@PathVariable Integer id) {
+		Venda obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> inserir (@RequestBody Funcionario obj){
+	public ResponseEntity<Void> inserir (@RequestBody Venda obj){
 		
 		service.inserir(obj);
 		
@@ -37,7 +37,7 @@ public class FuncionarioResource {
 		return ResponseEntity.created(uri).build();
 	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Funcionario obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody Venda obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
