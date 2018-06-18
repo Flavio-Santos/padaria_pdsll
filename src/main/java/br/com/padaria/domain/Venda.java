@@ -27,9 +27,6 @@ public class Venda implements Serializable{
 	@JoinColumn(name="mesa")
 	private List<Mesa> mesas = new ArrayList<>();
 	
-	@OneToMany
-	@JoinColumn(name="produto")
-	private List<Produto> produtos;
 	
 	@OneToOne
 	@JoinColumn(name="funcionario")
@@ -90,14 +87,6 @@ public class Venda implements Serializable{
 
 	public void setResponsavel(Funcionario responsavel) {
 		this.responsavel = responsavel;
-	}
-
-	public List<Produto> getProduto() {
-		return produtos;
-	}
-
-	public void setProduto(List<Produto> produtos) {
-		this.produtos = produtos;
 	}
 
 	public List<Mesa> getMesa() {

@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,6 +39,20 @@ public class MesaResource {
 		List<MesaDTO> listDto = listMesas.stream().map(obj -> new MesaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	@RequestMapping(value="/page", method = RequestMethod.GET)
+	public ResponseEntity<Page<MesaDTO>> findAPage(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="nome")String orderBy,
+			@RequestParam(value="direction", defaultValue="ASC")String direction) {
+		Page<Mesa> listMesas = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<MesaDTO> listDto = listMesas.map(obj -> new MesaDTO(obj));
+		
+		//usado para converter dados 
+		//List<MesaDTO> listDto = listMesas.stream().map(obj -> new MesaDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listDto);
+	}
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> inserir (@RequestBody Mesa obj){
 		
@@ -47,13 +63,14 @@ public class MesaResource {
 		
 		return ResponseEntity.created(uri).build();
 	}
-	//@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	//public ResponseEntity<Void> update(@RequestBody Mesa obj, @PathVariable Integer id) {
-	//	obj.setId(id);
-	//	obj = service.update(obj);
-	//	return ResponseEntity.noContent().build();
-	//}
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Mesa obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "addProduto/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateProdutos(@RequestBody Mesa obj, @PathVariable Integer id) {
 		obj.setId(id);
 		Double soma = 0.0;
