@@ -1,7 +1,9 @@
 package br.com.padaria.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.padaria.domain.Mesa;
+import br.com.padaria.domain.Produto;
+import br.com.padaria.dto.MesaDTO;
 import br.com.padaria.services.MesaService;
 
 @RestController
@@ -28,9 +32,10 @@ public class MesaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Mesa>> findAll() {
+	public ResponseEntity<List<MesaDTO>> findAll() {
 		List<Mesa> listMesas = service.findAll();
-		return ResponseEntity.ok().body(listMesas);
+		List<MesaDTO> listDto = listMesas.stream().map(obj -> new MesaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> inserir (@RequestBody Mesa obj){
@@ -42,9 +47,22 @@ public class MesaResource {
 		
 		return ResponseEntity.created(uri).build();
 	}
+	//@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	//public ResponseEntity<Void> update(@RequestBody Mesa obj, @PathVariable Integer id) {
+	//	obj.setId(id);
+	//	obj = service.update(obj);
+	//	return ResponseEntity.noContent().build();
+	//}
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Mesa obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> updateProdutos(@RequestBody Mesa obj, @PathVariable Integer id) {
 		obj.setId(id);
+		Double soma = 0.0;
+		List<Produto> produtos = new ArrayList<>();
+		produtos = obj.getProdutos();
+		for (Produto produto : produtos) {
+			soma += (produto.getPreco())*produto.getQuantidade();
+		}
+		obj.setTotal(soma);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}

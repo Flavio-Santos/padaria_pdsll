@@ -24,6 +24,8 @@ public class Produto implements Serializable{
 	
 	private Boolean ativo;
 	
+	private Integer quantidade;
+	
 	public Produto() {
 	}
 
@@ -34,6 +36,15 @@ public class Produto implements Serializable{
 		this.preco = preco;
 		this.descricao = descricao;
 		this.ativo = ativo;
+	}
+	public Produto(Integer id, String nome, Double preco, String descricao, Boolean ativo, Integer quantidade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+		this.descricao = descricao;
+		this.ativo = ativo;
+		this.quantidade = quantidade;
 	}
 
 	public Integer getId() {
@@ -106,5 +117,13 @@ public class Produto implements Serializable{
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
 	}
 }
